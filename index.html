@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Réplica de Mercado Libre Colombia - Compra y vende productos online">
+    <meta name="keywords" content="mercado libre, ecommerce, compras online, ventas online, productos">
+    <title>Mercado Libre Colombia - Compra y vende productos online</title>
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+            background-color: #EBEBEB;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Utilidades */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* BEM Metodología */
+
+        /* Barra ubicación/envíos */
+        .header__location-bar {
+            background: #fff159;
+            font-size: 14px;
+            padding: 4px 16px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #eee;
+        }
+        .header__location-bar svg {
+            margin-left: 8px;
+        }
+
+        /* Beneficios destacados */
+        .header__benefits {
+            display: flex;
+            justify-content: space-between;
+            background: #fff;
+            color: #333;
+            font-size: 13px;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .header__benefits > div {
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Header */
+        .header {
+            background-color: #FFF159;
+            padding: 8px 0;
+        }
+
+        .header__container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .header__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header__logo {
+            width: 134px;
+        }
+
+        .header__search {
+            flex-grow: 1;
+            max-width: 600px;
+            margin: 0 24px;
+            position: relative;
+        }
+
+        .search__form {
+            display: flex;
+            width: 100%;
+        }
+
+        .search__input {
+            flex-grow: 1;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 2px 0 0 2px;
+            outline: none;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+        }
+
+        .search__button {
+            background-color: white;
+            border: none;
+            padding: 0 15px;
+            border-left: 1px solid #e6e6e6;
+            cursor: pointer;
+            border-radius: 0 2px 2px 0;
+            box-shadow: 0 1px 2px 0 rgba(0,0,0,.2);
+        }
+
+        .header__promo {
+            display: flex;
+            align-items: center;
+        }
+
+        .header__promo-img {
+            height: 40px;
+        }
+
+        .header__nav {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            font-size: 14px;
+        }
+
+        .nav__menu {
+            display: flex;
+            gap: 16px;
+        }
+
+        .nav__user {
+            display: flex;
+            gap: 16px;
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 16px;
+            margin-bottom: 16px;
+        }
+
+        .hero__carousel {
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+
+        .hero__image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Multi-slider */
+        .hero__carousel-multi {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+        }
+        .hero__carousel-multi .hero__image {
+            width: calc(50% - 8px);
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+
+        /* Payment */
+        .payment {
+            background-color: white;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+
+        .payment__options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .payment__option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            text-align: center;
+            width: calc(25% - 18px);
+            min-width: 120px;
+        }
+
+        .payment__icon {
+            width: 48px;
+            height: 48px;
+            background-color: #EBF5FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3483FA;
+            font-size: 24px;
+        }
+
+        .payment__title {
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .payment__text {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Offers */
+        .offers {
+            margin-bottom: 16px;
+        }
+
+        .offers__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .offers__title {
+            font-size: 24px;
+            font-weight: 500;
+        }
+
+        .offers__link {
+            color: #3483FA;
+            font-size: 14px;
+        }
+
+        .offers__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 16px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            transition: box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .product-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,.1);
+        }
+
+        .product-card__image {
+            height: 224px;
+            width: 100%;
+            object-fit: contain;
+            border-bottom: 1px solid #f5f5f5;
+            padding: 16px;
+        }
+
+        .product-card__content {
+            padding: 16px;
+        }
+
+        .product-card__price {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .product-card__discount {
+            color: #00a650;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .product-card__shipping {
+            color: #00a650;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .product-card__title {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        /* NUEVO: Badges FULL, favorito, estrellas */
+        .product-card__badges {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        .badge-full {
+            background: #39b54a;
+            color: #fff;
+            border-radius: 2px;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .badge-fav {
+            color: #3483FA;
+            font-size: 16px;
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .badge-fav.selected {
+            color: #ff585d;
+        }
+        .product-card__stars {
+            font-size: 15px;
+            color: #ffb400;
+            margin-bottom: 8px;
+        }
+
+        /* Categories */
+        .categories {
+            margin-bottom: 16px;
+        }
+
+        .categories__title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .categories__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        .category-card {
+            background-color: white;
+            border-radius: 4px;
+            overflow: hidden;
+            text-align: center;
+            padding: 16px;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,.1);
+        }
+
+        .category-card__icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 8px;
+            background-color: #EBF5FF;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3483FA;
+            font-size: 24px;
+        }
+
+        .category-card__title {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* Subscription */
+        .subscription {
+            background-color: white;
+            border-radius: 6px;
+            padding: 32px;
+            margin-bottom: 16px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,.1);
+        }
+
+        .subscription__title {
+            font-size: 24px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .subscription__text {
+            color: #666;
+            margin-bottom: 24px;
+        }
+
+        .subscription__button {
+            background-color: #3483FA;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            font-weight: 500;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .subscription__button:hover {
+            background-color: #2968c8;
+        }
+
+        /* NUEVO: Floating help button */
+        .floating-help-btn {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #3483FA;
+            color: #fff;
+            border-radius: 50%;
+            padding: 16px;
+            font-size: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.2);
+            z-index: 999;
+            text-align: center;
+            transition: background 0.2s;
+        }
+        .floating-help-btn:hover {
+            background: #2968c8;
+        }
+
+        /* NUEVO: Footer países y legal */
+        .footer__countries {
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: white;
+            padding: 40px 0 0 0;
+        }
+
+        .footer__container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .footer__sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .footer__section-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 16px;
+        }
+
+        .footer__link {
+            display: block;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .footer__link:hover {
+            color: #333;
+        }
+
+        .footer__copyright {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            padding-top: 24px;
+            border-top: 1px solid #eee;
+        }
+
+        /* NUEVO: Modal login */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0; top: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.4);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal__content {
+            background: #fff;
+            padding: 32px 24px;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 340px;
+            box-shadow: 0 4px 24px rgba(0,0,0,.18);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .modal__close {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            cursor: pointer;
+            font-size: 22px;
+            color: #888;
+        }
+        .modal__content input[type="email"],
+        .modal__content input[type="password"] {
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+        }
+        .modal__content button {
+            background: #3483FA;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .modal__content button:hover {
+            background: #2968c8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header__container {
+                gap: 8px;
+            }
+
+            .header__top {
+                flex-wrap: wrap;
+            }
+
+            .header__logo {
+                width: 100px;
+            }
+
+            .header__search {
+                order: 3;
+                margin: 8px 0;
+                width: 100%;
+                max-width: 100%;
+            }
+
+            .header__promo {
+                display: none;
+            }
+
+            .nav__menu {
+                overflow-x: auto;
+                width: 100%;
+                padding-bottom: 8px;
+                justify-content: flex-start;
+            }
+
+            .payment__options {
+                gap: 16px;
+            }
+
+            .payment__option {
+                width: calc(50% - 8px);
+            }
+
+            .offers__grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            }
+
+            .product-card__image {
+                height: 160px;
+            }
+
+            .subscription {
+                padding: 24px 16px;
+            }
+
+            .hero__carousel-multi {
+                flex-direction: column;
+            }
+            .hero__carousel-multi .hero__image {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .offers__header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .categories__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- NUEVO: Barra ubicación/envíos -->
+    <div class="header__location-bar">
+        <span>Enviar a <strong>Ingrese su ubicación</strong></span>
+        <svg width="16" height="16" fill="none" viewBox="0 0 16 16"><circle cx="8" cy="7" r="4.5" stroke="#2D3277" stroke-width="1.5"/><path d="M8 12V16" stroke="#2D3277" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+    <header class="header">
+        <!-- NUEVO: Beneficios destacados -->
+        <div class="header__benefits">
+            <div>🔥 Ofertas relámpago</div>
+            <div>🚚 Envíos gratis desde $99.000</div>
+            <div>🔒 Compra protegida</div>
+            <div>💳 Hasta 12 cuotas sin interés</div>
+        </div>
+        <div class="container header__container">
+            <div class="header__top">
+                <a href="#" class="header__logo">
+                    <!-- ...SVG LOGO IGUAL... -->
+                    <svg width="134" height="34" viewBox="0 0 134 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="..." fill="#FFE600"/>
+                        <path d="..." fill="#2D3277"/>
+                        <!-- ...resto del SVG... -->
+                    </svg>
+                </a>
+                <div class="header__search">
+                    <form class="search__form">
+                        <input type="text" class="search__input" placeholder="Buscar productos, marcas y más...">
+                        <button type="submit" class="search__button">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15.7 14.3L11.5 10.1C12.4 9 13 7.6 13 6C13 2.7 10.3 0 7 0C3.7 0 1 2.7 1 6C1 9.3 3.7 12 7 12C8.6 12 10 11.4 11.1 10.5L15.3 14.7C15.5 14.9 15.8 14.9 16 14.7C16.1 14.5 16.1 14.3 15.7 14.3ZM2 6C2 3.2 4.2 1 7 1C9.8 1 12 3.2 12 6C12 8.8 9.8 11 7 11C4.2 11 2 8.8 2 6Z" fill="#666666"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                <div class="header__promo">
+                    <img src="/api/placeholder/200/40" alt="Promoción" class="header__promo-img">
+                </div>
+            </div>
+            <div class="header__nav">
+                <ul class="nav__menu">
+                    <li><a href="#">Categorías</a></li>
+                    <li><a href="#">Ofertas</a></li>
+                    <li><a href="#">Historial</a></li>
+                    <li><a href="#">Supermercado</a></li>
+                    <li><a href="#">Moda</a></li>
+                    <li><a href="#">Vender</a></li>
+                    <li><a href="#">Ayuda</a></li>
+                </ul>
+                <ul class="nav__user">
+                    <li><a href="#">Crea tu cuenta</a></li>
+                    <!-- NUEVO: botón que abre modal -->
+                    <li><a href="#" id="loginBtn">Ingresa</a></li>
+                    <li><a href="#">Mis compras</a></li>
+                    <li><a href="#">🛒</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="hero__carousel">
+                <img src="/api/placeholder/1200/340" alt="Promoción destacada" class="hero__image">
+            </div>
+            <!-- NUEVO: Slider secundario -->
+            <div class="hero__carousel-multi">
+                <img src="/api/placeholder/1200/180?text=Promo+2" alt="Promo 2" class="hero__image">
+                <img src="/api/placeholder/1200/180?text=Promo+3" alt="Promo 3" class="hero__image">
+            </div>
+        </section>
+
+        <section class="payment">
+            <div class="payment__options">
+                <div class="payment__option">
+                    <div class="payment__icon">💳</div>
+                    <h3 class="payment__title">Tarjeta de crédito</h3>
+                    <p class="payment__text">Ver promociones bancarias</p>
+                </div>
+                <div class="payment__option">
+                    <div class="payment__icon">💰</div>
+                    <h3 class="payment__title">Cuotas sin interés</h3>
+                    <p class="payment__text">Con tarjetas seleccionadas</p>
+                </div>
+                <div class="payment__option">
+                    <div class="payment__icon">🏦</div>
+                    <h3 class="payment__title">Transferencia</h3>
+                    <p class="payment__text">Desde tu banco</p>
+                </div>
+                <div class="payment__option">
+                    <div class="payment__icon">➕</div>
+                    <h3 class="payment__title">Más medios de pago</h3>
+                    <p class="payment__text">Ver todos</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="offers">
+            <div class="offers__header">
+                <h2 class="offers__title">Ofertas</h2>
+                <a href="#" class="offers__link">Ver todas</a>
+            </div>
+            <div class="offers__grid">
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220" alt="Producto 1" class="product-card__image">
+                    <div class="product-card__content">
+                        <!-- NUEVO: badges -->
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐☆ (123)</div>
+                        <p class="product-card__price">$ 199.900</p>
+                        <p class="product-card__discount">32% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Smartphone Samsung Galaxy A54 128GB</h3>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220" alt="Producto 2" class="product-card__image">
+                    <div class="product-card__content">
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐⭐ (201)</div>
+                        <p class="product-card__price">$ 89.900</p>
+                        <p class="product-card__discount">40% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Audífonos Inalámbricos Bluetooth TWS</h3>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220" alt="Producto 3" class="product-card__image">
+                    <div class="product-card__content">
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐☆ (91)</div>
+                        <p class="product-card__price">$ 499.900</p>
+                        <p class="product-card__discount">25% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Televisor Smart TV 43 Pulgadas 4K UHD</h3>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220" alt="Producto 4" class="product-card__image">
+                    <div class="product-card__content">
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐⭐ (64)</div>
+                        <p class="product-card__price">$ 129.900</p>
+                        <p class="product-card__discount">45% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Licuadora Digital 7 Velocidades</h3>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220" alt="Producto 5" class="product-card__image">
+                    <div class="product-card__content">
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐☆ (183)</div>
+                        <p class="product-card__price">$ 349.900</p>
+                        <p class="product-card__discount">30% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Zapatillas Deportivas Running</h3>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- NUEVO: recomendados personalizados -->
+        <section class="recommended">
+            <div class="offers__header">
+                <h2 class="offers__title">Recomendados para ti</h2>
+                <a href="#" class="offers__link">Ver más</a>
+            </div>
+            <div class="offers__grid">
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220?text=Recomendado1" alt="Recomendado 1" class="product-card__image">
+                    <div class="product-card__content">
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐⭐ (99)</div>
+                        <p class="product-card__price">$ 59.900</p>
+                        <p class="product-card__discount">15% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Cargador Rápido USB-C 30W</h3>
+                    </div>
+                </article>
+                <article class="product-card">
+                    <img src="/api/placeholder/220/220?text=Recomendado2" alt="Recomendado 2" class="product-card__image">
+                    <div class="product-card__content">
+                        <div class="product-card__badges">
+                            <span class="badge-full">FULL</span>
+                            <span class="badge-fav" onclick="this.classList.toggle('selected')">♡</span>
+                        </div>
+                        <div class="product-card__stars">⭐⭐⭐⭐☆ (41)</div>
+                        <p class="product-card__price">$ 215.000</p>
+                        <p class="product-card__discount">10% OFF</p>
+                        <p class="product-card__shipping">Envío gratis</p>
+                        <h3 class="product-card__title">Mochila Impermeable Urbana</h3>
+                    </div>
+                </article>
+                <!-- Más productos recomendados aquí -->
+            </div>
+        </section>
+
+        <section class="categories">
+            <h2 class="categories__title">Categorías populares</h2>
+            <div class="categories__grid">
+                <article class="category-card">
+                    <div class="category-card__icon">📱</div>
+                    <h3 class="category-card__title">Celulares y Smartphones</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">💻</div>
+                    <h3 class="category-card__title">Computación</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">👕</div>
+                    <h3 class="category-card__title">Ropa y Accesorios</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">🏠</div>
+                    <h3 class="category-card__title">Hogar y Muebles</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">📺</div>
+                    <h3 class="category-card__title">Electrodomésticos</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">🎮</div>
+                    <h3 class="category-card__title">Consolas y Videojuegos</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">🚗</div>
+                    <h3 class="category-card__title">Accesorios para Vehículos</h3>
+                </article>
+                <article class="category-card">
+                    <div class="category-card__icon">🛠</div>
+                    <h3 class="category-card__title">Herramientas</h3>
+                </article>
+            </div>
+        </section>
+
+        <section class="subscription">
+            <h2 class="subscription__title">Suscríbete al nivel 6</h2>
+            <p class="subscription__text">Consigue los mejores beneficios en Mercado Libre y Mercado Pago</p>
+            <a href="#" class="subscription__button">Suscríbete</a>
+        </section>
+    </main>
+
+    <!-- NUEVO: Floating help button -->
+    <a href="#" class="floating-help-btn" title="¿Necesitas ayuda?">❔</a>
+
+    <!-- NUEVO: Modal login -->
+    <div id="loginModal" class="modal">
+        <div class="modal__content">
+            <span class="modal__close" id="closeModal">&times;</span>
+            <h2>Iniciar sesión</h2>
+            <input type="email" placeholder="Correo electrónico">
+            <input type="password" placeholder="Contraseña">
+            <button>Ingresar</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__sections">
+                <div class="footer__section">
+                    <h4 class="footer__section-title">Acerca de</h4>
+                    <a href="#" class="footer__link">Mercado Libre</a>
+                    <a href="#" class="footer__link">Investor Relations</a>
+                    <a href="#" class="footer__link">Tendencias</a>
+                    <a href="#" class="footer__link">Sustentabilidad</a>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__section-title">Otros sitios</h4>
+                    <a href="#" class="footer__link">Developers</a>
+                    <a href="#" class="footer__link">Mercado Pago</a>
+                    <a href="#" class="footer__link">Mercado Envíos</a>
+                    <a href="#" class="footer__link">Mercado Shops</a>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__section-title">Ayuda</h4>
+                    <a href="#" class="footer__link">Comprar</a>
+                    <a href="#" class="footer__link">Vender</a>
+                    <a href="#" class="footer__link">Resolución de problemas</a>
+                    <a href="#" class="footer__link">Centro de seguridad</a>
+                </div>
+                <div class="footer__section">
+                    <h4 class="footer__section-title">Redes sociales</h4>
+                    <a href="#" class="footer__link">Twitter</a>
+                    <a href="#" class="footer__link">Facebook</a>
+                    <a href="#" class="footer__link">Instagram</a>
+                    <a href="#" class="footer__link">YouTube</a>
+                </div>
+            </div>
+            <!-- NUEVO: países y legal -->
+            <div class="footer__countries">
+                <span>Colombia</span> | <span>Argentina</span> | <span>Chile</span> | <span>Brasil</span> | <span>México</span> | <span>Uruguay</span> | <span>Perú</span>
+            </div>
+            <div class="footer__copyright">
+                <p>Copyright © 1999-2025 Mercado Libre Colombia LTDA.</p>
+                <p><a href="#" class="footer__link">Términos y condiciones</a> | <a href="#" class="footer__link">Políticas de privacidad</a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    // Modal login
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const closeModal = document.getElementById('closeModal');
+
+    if (loginBtn && loginModal && closeModal) {
+        loginBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            loginModal.style.display = 'flex';
+        });
+        closeModal.addEventListener('click', function() {
+            loginModal.style.display = 'none';
+        });
+        window.addEventListener('click', function(e) {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+            }
+        });
+    }
+    </script>
+</body>
+</html>
